@@ -6,7 +6,7 @@
     "license-header-check": "dist/cli.js",
     "licenseheadercheck": "dist/cli.js"
   },
-  "main": "dist/cli.js",
+  "main": "build/components/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/georgegillams/restart-ee-router.git"
@@ -14,6 +14,8 @@
   "author": "George Gillams",
   "license": "MIT",
   "scripts": {
+    "prerelease": "npm run transpile",
+    "release": "release-it",
     "transpile": "npm run pretranspile && npm run transpile:js",
     "transpile:js": "babel src -d build --copy-files",
     "clean": "npm run test:clean && npm run build:clean",
@@ -28,7 +30,6 @@
     "test:clean": "rimraf ./coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll"
   },
-  "main": "build/components/index.js",
   "lint-staged": {
     "*.js": [
       "eslint --fix",
@@ -63,6 +64,7 @@
     "babel-plugin-transform-react-constant-elements": "6.23.0",
     "babel-plugin-transform-react-inline-elements": "6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.13",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
@@ -83,6 +85,7 @@
     "jest-cli": "^23.1.0",
     "lint-staged": "^8.1.0",
     "nodemon": "^1.18.9",
+    "release-it": "^12.3.3",
     "rimraf": "2.6.2"
   }
 }
