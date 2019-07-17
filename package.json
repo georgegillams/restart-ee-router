@@ -3,10 +3,9 @@
   "version": "0.0.2",
   "description": "A simple app for regularly restarting your EE router using your admin password.",
   "bin": {
-    "license-header-check": "dist/cli.js",
-    "licenseheadercheck": "dist/cli.js"
+    "restart-ee-router": "dist/cli.js",
+    "restarteerouter": "dist/cli.js"
   },
-  "main": "build/components/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/georgegillams/restart-ee-router.git"
@@ -17,13 +16,13 @@
     "prerelease": "npm run transpile",
     "release": "release-it",
     "transpile": "npm run pretranspile && npm run transpile:js",
-    "transpile:js": "babel src -d build --copy-files",
-    "clean": "npm run test:clean && npm run build:clean",
+    "transpile:js": "babel src -d dist --copy-files",
+    "clean": "npm run test:clean && npm run transpile:clean",
     "fix:package-lock": "sed -i '' -e 's/http:\\/\\//https:\\/\\//g' $(find . -name 'package-lock.json')",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint . --ext .js,.jsx",
     "lint:js:fix": "eslint . --ext .js,.jsx --fix",
-    "transpile:clean": "rimraf ./build",
+    "transpile:clean": "rimraf ./dist",
     "pretranspile": "npm run transpile:clean",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
     "test": "cross-env NODE_ENV=test jest --coverage",
