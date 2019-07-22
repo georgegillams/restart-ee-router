@@ -1,6 +1,6 @@
 {
   "name": "restart-ee-router",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A simple app for regularly restarting your EE router using your admin password.",
   "bin": {
     "restart-ee-router": "dist/cli.js",
