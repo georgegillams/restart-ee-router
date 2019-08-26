@@ -1,4 +1,7 @@
 # restart-ee-router
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/georgegillams/restart-ee-router.svg)](https://greenkeeper.io/)
+
 We find that our [EE Smart Hub Router](https://shop.ee.co.uk/broadband/smart-hub) needs restarting around once a week to keep working reliably, and they lack a setting for restarting themselves automatically.
 
 ![EE Smart Hub Router](https://shop.ee.co.uk/content/dam/everything-everywhere/images/SHOP/Broadband/smart-hub-HBB-device-1x1.jpg.eeimg.480.480.medium.jpg/1533028192465.jpg)
