@@ -87,5 +87,8 @@
     "nodemon": "^1.18.9",
     "release-it": "^12.3.3",
     "rimraf": "3.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
