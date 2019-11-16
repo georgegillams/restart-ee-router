@@ -16,8 +16,15 @@ brew install node
 or:
 ```bash
 sudo apt-get update
-sudo apt-get install nodejs
+curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+sudo apt install nodejs
 sudo apt-get install npm
+```
+
+To run on the Raspberry Pi, you may also need the following:
+```bash
+sudo apt-get install chromium-browser
+sudo apt-get install gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 ```
 
 ## How to use
@@ -44,7 +51,7 @@ restart-ee-router [arguments]
 ## Scheduling
 macOS and Linux both come with `crontab` preinstalled.
 
-[There's plenty of in-depth information about scheduling tasks in `crontab`](https://ole.michelsen.dk/blog/schedule-jobs-with-crontab-on-mac-osx.html), but I'll help you set up a simple task to restart the router every Monday morning at 0400:
+[There's plenty of in-depth information about scheduling tasks in `crontab`](https://ole.michelsen.dk/blog/schedule-jobs-with-crontab-on-mac-osx.html), but I'll help you set up a simple task to restart the router every morning at 0400:
 
 1. Open crontab config:
 ```bash
@@ -53,7 +60,7 @@ env EDITOR=vim crontab -e # sets the editor to vim and opens the crontab config
 
 2. Add the task:
 ```crontab
-0 5 * * 1 restart-ee-router -p "MY_ROUTER_ADMIN_PASSWORD" -s
+0 4 * * 1 restart-ee-router -p "MY_ROUTER_ADMIN_PASSWORD" -s
 ```
 ## Contributing
  TODO
