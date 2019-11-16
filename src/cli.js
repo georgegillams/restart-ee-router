@@ -13,7 +13,7 @@ const getCliArg = (argFlag, argFlagShort) => {
   return null;
 };
 
-const password = getCliArg('password', 'p');
+const passwordArg = getCliArg('password', 'p');
 const debugging =
   process.argv.includes('--debugging') || process.argv.includes('-d');
 const verbose =
@@ -42,9 +42,9 @@ const cli = (err, { password }) => {
       console.log('');
       process.exit(0);
     },
-    err => {
-      if (err) {
-        console.error(err);
+    error => {
+      if (error) {
+        console.error(error);
       }
       console.log('');
       process.exit(1);
@@ -53,7 +53,7 @@ const cli = (err, { password }) => {
 };
 
 if (silent) {
-  cli(null, { password });
+  cli(null, { password: passwordArg });
 } else {
   prompt.start();
   prompt.get(schema, cli);
