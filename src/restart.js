@@ -17,11 +17,16 @@ const sleep = async debugging => {
   }
 };
 
-const runProcess = (password, debugging, verbose) =>
+const runProcess = (password, debugging, verbose, executablePath) =>
   new Promise((resolve, reject) => {
     console.log(`Accessing router`);
 
-    puppeteer.launch({ headless: !debugging }).then(async browser => {
+    const puppeteerArgs = { headless: !debugging };
+    if (executablePath) {
+      puppeteerArgs.executablePath = executablePath;
+    }
+
+    puppeteer.launch(puppeteerArgs).then(async browser => {
       const page = await browser.newPage();
       await page.goto(ROUTER_ADDRESS);
 
