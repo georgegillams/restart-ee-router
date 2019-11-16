@@ -30,7 +30,7 @@ const runProcess = (password, debugging, verbose, executablePath) =>
       const page = await browser.newPage();
       await page.goto(ROUTER_ADDRESS);
 
-      const restartButtonElement = await page.$('#restart');
+      const restartButtonElement = await page.$('#restart_ti_one_text');
       if (verbose) {
         console.log(`restartButtonElement`, restartButtonElement);
       }
@@ -38,18 +38,14 @@ const runProcess = (password, debugging, verbose, executablePath) =>
         reject(Error('Restart button not found.'));
       }
 
+      // The restart button isn't actually a button, and the classes and click behaviour change on different mouse events.
+      // Clicking it 3 times seems to trigger the behaviour we want.
       console.log(`Clicking restart`);
-      // Because the restart element isn't actually a button, we need to simulate a click event on it.
-      const restartPos = await restartButtonElement.boundingBox();
-
-      if (verbose) {
-        console.log(`restartPos`, restartPos);
-      }
-
-      const clickPos = { x: restartPos.x + 10, y: restartPos.y + 10 };
-      await page.mouse.move(clickPos.x, clickPos.y);
+      restartButtonElement.click();
       await sleep(debugging);
-      await page.mouse.click(clickPos.x, clickPos.y);
+      restartButtonElement.click();
+      await sleep(debugging);
+      restartButtonElement.click();
 
       await sleep(debugging);
 
