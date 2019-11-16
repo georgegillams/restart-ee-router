@@ -1,49 +1,13 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
 const puppeteer = require('puppeteer');
 
 const ROUTER_ADDRESS = 'http://192.168.1.254/';
 
-const normaliseText = text => {
-  let result = text.replace(/\r\n|\r/g, '\n');
-  result = result.replace(/\ +/g, ' ');
-  return result;
-};
-
-const getElementWithInnerText = async (page, elementType, linkString) => {
-  const elements = await page.$$(elementType);
-  for (var i = 0; i < elements.length; i++) {
-    let valueHandle = await elements[i].getProperty('innerText');
-    let linkText = await valueHandle.jsonValue();
-    const text = getText(linkText);
-    if (normaliseText(text).includes(normaliseText(linkString))) {
-      return elements[i];
-    }
-  }
-  return null;
-};
-
-const getElementWithValue = async (page, elementType, linkString) => {
-  const elements = await page.$$(elementType);
-  for (var i = 0; i < elements.length; i++) {
-    let valueHandle = await elements[i].getProperty('value');
-    let linkText = await valueHandle.jsonValue();
-    const text = getText(linkText);
-    if (normaliseText(text).includes(normaliseText(linkString))) {
-      return elements[i];
-    }
-  }
-  return null;
-};
-
-function delay(time) {
-  return new Promise(function(resolve) {
+const delay = time =>
+  new Promise(resolve => {
     setTimeout(resolve, time);
   });
-}
 
 const sleep = async debugging => {
   if (debugging) {
@@ -70,6 +34,7 @@ const runProcess = (password, debugging, verbose) =>
       }
 
       console.log(`Clicking restart`);
+      // Because the restart element isn't actually a button, we need to simulate a click event on it.
       const restartPos = await restartButtonElement.boundingBox();
 
       if (verbose) {
@@ -111,6 +76,15 @@ const runProcess = (password, debugging, verbose) =>
       await passwordOkButton.click();
 
       await sleep(debugging);
+
+      // Check if the password was correct
+      const passwordErrorElement = await page.$('#passwordTitle_yellow');
+      if (verbose) {
+        console.log(`passwordErrorElement`, passwordErrorElement);
+      }
+      if (passwordErrorElement) {
+        reject('The password was not accepted.');
+      }
 
       const finalRestartButtonElement = await page.$('.regular_button');
       if (verbose) {
