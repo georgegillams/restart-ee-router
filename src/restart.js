@@ -18,13 +18,13 @@ const sleep = async debugging => {
   }
 };
 
-const runProcess = (password, debugging, verbose, executablePath) =>
+const runProcess = (password, debugging, windowed, verbose, executablePath) =>
   new Promise((resolve, reject) => {
     console.log(`Accessing router`);
 
     let puppeteerInstance = puppeteer;
 
-    const puppeteerArgs = { headless: !debugging };
+    const puppeteerArgs = { headless: !debugging && !windowed };
     if (executablePath) {
       puppeteerInstance = puppeteerCore;
       puppeteerArgs.executablePath = executablePath;
@@ -52,10 +52,10 @@ const runProcess = (password, debugging, verbose, executablePath) =>
 
       const clickPos = { x: restartPos.x + 10, y: restartPos.y + 10 };
       await page.mouse.move(clickPos.x, clickPos.y);
-      await sleep(debugging);
+      await sleep(windowed);
       await page.mouse.click(clickPos.x, clickPos.y);
 
-      await sleep(debugging);
+      await sleep(windowed);
 
       const passwordFieldElement = await page.$('#login_password_input_noshow');
       if (verbose) {
@@ -65,13 +65,13 @@ const runProcess = (password, debugging, verbose, executablePath) =>
         reject('Password field not found.');
       }
 
-      await sleep(debugging);
+      await sleep(windowed);
 
       console.log(`Typing password`, debugging ? password : '*********');
       await passwordFieldElement.focus();
       await page.keyboard.type(password);
 
-      await sleep(debugging);
+      await sleep(windowed);
 
       const passwordOkButton = await page.$('#ok_button');
       if (verbose) {
@@ -84,7 +84,7 @@ const runProcess = (password, debugging, verbose, executablePath) =>
       console.log(`Submitting password`);
       await passwordOkButton.click();
 
-      await sleep(debugging);
+      await sleep(windowed);
 
       // Check if the password was correct
       const passwordErrorElement = await page.$('#passwordTitle_yellow');
@@ -105,7 +105,7 @@ const runProcess = (password, debugging, verbose, executablePath) =>
 
       await finalRestartButtonElement.click();
 
-      await sleep(debugging);
+      await sleep(windowed);
 
       await browser.close();
       resolve('All done 👍');
