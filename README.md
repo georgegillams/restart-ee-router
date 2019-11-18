@@ -38,6 +38,18 @@ sudo npm -g restart-ee-router
 restart-ee-router [arguments]
 ```
 
+## Using Docker
+
+### Setup
+```
+docker build -t restart-ee-router -f docker/Dockerfile .
+```
+
+### Run
+```
+docker run restart-ee-router
+```
+
 ## Arguments
 
 | name                         | default |
