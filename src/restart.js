@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const puppeteer = require('puppeteer');
+const puppeteerCore = require('puppeteer-core');
 
 const ROUTER_ADDRESS = 'http://192.168.1.254/';
 
@@ -21,12 +22,15 @@ const runProcess = (password, debugging, verbose, executablePath) =>
   new Promise((resolve, reject) => {
     console.log(`Accessing router`);
 
+    let puppeteerInstance = puppeteer;
+
     const puppeteerArgs = { headless: !debugging };
     if (executablePath) {
+      puppeteerInstance = puppeteerCore;
       puppeteerArgs.executablePath = executablePath;
     }
 
-    puppeteer.launch(puppeteerArgs).then(async browser => {
+    puppeteerInstance.launch(puppeteerArgs).then(async browser => {
       const page = await browser.newPage();
       await page.goto(ROUTER_ADDRESS);
 
