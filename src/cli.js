@@ -17,6 +17,8 @@ const passwordArg = getCliArg('password', 'p');
 const executablePathArg = getCliArg('executablePath', 'ep');
 const debugging =
   process.argv.includes('--debugging') || process.argv.includes('-d');
+const windowed =
+  process.argv.includes('--windowed') || process.argv.includes('-w');
 const verbose =
   process.argv.includes('--verbose') || process.argv.includes('-v');
 const silent = process.argv.includes('--silent') || process.argv.includes('-s');
@@ -35,7 +37,7 @@ const cli = (err, { password, executablePath }) => {
   console.log('Starting script');
   console.log('');
 
-  restart(password, debugging, verbose, executablePath).then(
+  restart(password, debugging, windowed, verbose, executablePath).then(
     result => {
       if (result) {
         console.log(result);
