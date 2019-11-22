@@ -1,3 +1,6 @@
+To fake a display in Raspbian:
+
+
 Install `xserver-xorg-video-dummy`:
 
 ```
@@ -9,7 +12,7 @@ Create `xorg.conf`:
 sudo vi /usr/share/X11/xorg.conf.d/xorg.conf
 ```
 
-Add the following:
+Add the following to the newly created file:
 
 ```
 Section "Device"
@@ -33,4 +36,9 @@ Section "Screen"
     Modes "1024x800"
     EndSubSection
 EndSection
+```
+
+Restart
+```
+sudo reboot
 ```

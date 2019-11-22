@@ -56,7 +56,7 @@ Note that if `debugging`, then `windowed` mode will automatically be enabled too
 ## Scheduling
 macOS and Linux both come with `crontab` preinstalled.
 
-[There's plenty of in-depth information about scheduling tasks in `crontab`](https://ole.michelsen.dk/blog/schedule-jobs-with-crontab-on-mac-osx.html), but I'll help you set up a simple task to restart the router every morning at 0400:
+[There's plenty of in-depth information about scheduling tasks in `crontab`](https://ole.michelsen.dk/blog/schedule-jobs-with-crontab-on-mac-osx.html), but I'll help you set up a simple task to restart the router every Monday morning at 0400:
 
 1. Open crontab config:
 ```bash
@@ -65,7 +65,7 @@ env EDITOR=vim crontab -e # sets the editor to vim and opens the crontab config
 
 2. Add the task:
 ```crontab
-0 4 * * 1 restart-ee-router -p "MY_ROUTER_ADMIN_PASSWORD" -s
+0 4 * * Mon restart-ee-router -p "MY_ROUTER_ADMIN_PASSWORD" -s
 ```
 
 ### Debian
@@ -74,8 +74,10 @@ On debian linux, it is necessary to be running a desktop GUI for this to work. Y
 
 For example:
 ```crontab
-0 4 * * 1 DISPLAY=:0 npx restart-ee-router -w -s -p MY_ROUTER_ADMIN_PASSWORD -ep "/usr/bin/chromium-browser"
+0 4 * * Mon DISPLAY=:0 npx restart-ee-router -w -s -p MY_ROUTER_ADMIN_PASSWORD -ep "/usr/bin/chromium-browser"
 ```
+
+Further to this, if your device is not connected to a router, you may need to fake a display. [See my guide on adding a fake display to Raspbian](./fake_display_guide.md)
 
 ## Contributing
  TODO
