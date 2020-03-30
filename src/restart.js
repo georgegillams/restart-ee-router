@@ -3,8 +3,6 @@
 const puppeteer = require('puppeteer');
 const puppeteerCore = require('puppeteer-core');
 
-const ROUTER_ADDRESS = 'http://192.168.1.254/';
-
 const delay = time =>
   new Promise(resolve => {
     setTimeout(resolve, time);
@@ -18,7 +16,14 @@ const sleep = async debugging => {
   }
 };
 
-const runProcess = (password, debugging, windowed, verbose, executablePath) =>
+const runProcess = (
+  password,
+  debugging,
+  windowed,
+  verbose,
+  executablePath,
+  routerAddress,
+) =>
   new Promise((resolve, reject) => {
     console.log(`Accessing router`);
 
@@ -32,7 +37,7 @@ const runProcess = (password, debugging, windowed, verbose, executablePath) =>
 
     puppeteerInstance.launch(puppeteerArgs).then(async browser => {
       const page = await browser.newPage();
-      await page.goto(ROUTER_ADDRESS);
+      await page.goto(routerAddress);
 
       const restartButtonElement = await page.$('#restart');
       if (verbose) {
