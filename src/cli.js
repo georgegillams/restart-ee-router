@@ -3,6 +3,8 @@
 const restart = require('./restart.js');
 const prompt = require('prompt');
 
+const DEFAULT_ROUTER_ADDRESS = 'http://192.168.1.254/';
+
 const getCliArg = (argFlag, argFlagShort) => {
   if (process.argv.includes(`--${argFlag}`)) {
     return process.argv[process.argv.indexOf(`--${argFlag}`) + 1];
@@ -15,6 +17,7 @@ const getCliArg = (argFlag, argFlagShort) => {
 
 const passwordArg = getCliArg('password', 'p');
 const executablePathArg = getCliArg('executablePath', 'ep');
+const routerAddressArg = getCliArg('routerAddress', 'ra');
 const debugging =
   process.argv.includes('--debugging') || process.argv.includes('-d');
 const windowed =
@@ -37,7 +40,14 @@ const cli = (err, { password, executablePath }) => {
   console.log('Starting script');
   console.log('');
 
-  restart(password, debugging, windowed, verbose, executablePath).then(
+  restart(
+    password,
+    debugging,
+    windowed,
+    verbose,
+    executablePath,
+    routerAddressArg || DEFAULT_ROUTER_ADDRESS,
+  ).then(
     result => {
       if (result) {
         console.log(result);

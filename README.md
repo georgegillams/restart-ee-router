@@ -40,14 +40,15 @@ restart-ee-router [arguments]
 
 ## Arguments
 
-| name                         | default |
-| ---------------------------- | ------- |
-| `--password` or `-p`         | NA      |
-| `--debugging` or `-d`        | false   |
-| `--executablePath` or `-ep`  | null    |
-| `--silent` or `-s`           | false   |
-| `--verbose` or `-v`          | false   |
-| `--windowed` or `-w`         | false   |
+| name                         | default               |
+| ---------------------------- | --------------------- |
+| `--password` or `-p`         | NA                    |
+| `--debugging` or `-d`        | false                 |
+| `--executablePath` or `-ep`  | null                  |
+| `--router-address` or `-ra`  | http://192.168.1.254/ |
+| `--silent` or `-s`           | false                 |
+| `--verbose` or `-v`          | false                 |
+| `--windowed` or `-w`         | false                 |
 
 Note that if `executablePath` is specified, `puppeteer-core` will be used instead of `puppeteer`.
 
