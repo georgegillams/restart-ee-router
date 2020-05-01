@@ -27,7 +27,9 @@
     "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:clean": "rimraf ./coverage",
-    "test:watch": "cross-env NODE_ENV=test jest --watchAll"
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "lint-staged": {
     "*.js": [
@@ -46,7 +48,8 @@
     "puppeteer": "^2.1.0",
     "puppeteer-core": "^1.11.0",
     "wget-improved": "^3.0.2",
-    "whatwg-fetch": "3.0.0"
+    "whatwg-fetch": "3.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -91,5 +94,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "snyk": true
 }
