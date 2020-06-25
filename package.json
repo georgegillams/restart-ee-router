@@ -46,7 +46,7 @@
     "moment": "^2.22.2",
     "prompt": "^1.0.0",
     "puppeteer": "^2.1.0",
-    "puppeteer-core": "^1.11.0",
+    "puppeteer-core": "^4.0.1",
     "wget-improved": "^3.0.2",
     "whatwg-fetch": "3.0.0",
     "snyk": "^1.319.2"
